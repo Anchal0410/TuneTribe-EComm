@@ -4,25 +4,25 @@ module.exports = {
   /**
    * An asynchronous register function that runs before
    * your application is initialized.
-   *
-   * This gives you an opportunity to extend code.
    */
   register({ strapi }) {
-    // Add CORS middleware configuration
-    strapi.config.middleware.settings.cors = {
-      enabled: true,
-      origin: ['https://tune-tribe-e-com.vercel.app/'], // Allowed origins
-      headers: '*', // Allowed headers
-      credentials: true
+    // Add CORS middleware configuration dynamically
+    const corsMiddleware = {
+      name: 'strapi::cors',
+      config: {
+        enabled: true,
+        origin: ['https://tune-tribe-e-com.vercel.app/'], // Allowed origins
+        headers: '*', // Allowed headers
+      },
     };
+
+    // Add the CORS middleware to the existing middlewares
+    strapi.config.middlewares = [...(strapi.config.middlewares || []), corsMiddleware];
   },
 
   /**
    * An asynchronous bootstrap function that runs before
    * your application gets started.
-   *
-   * This gives you an opportunity to set up your data model,
-   * run jobs, or perform some special logic.
    */
   bootstrap({ strapi }) {
     console.log('Strapi application is starting...');

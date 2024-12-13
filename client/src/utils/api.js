@@ -9,8 +9,8 @@ const params = {
 export const fetchDataFromApi = async (url)=>{
     try {
         console.log(process.env.REACT_APP_DEV_URL); 
-        const {data} = await axios.get(process.env.REACT_APP_DEV_URL + url , params);
-        console.log(process.env.REACT_APP_DEV_URL);
+        const {data} = await axios.get(process.env.REACT_APP_STRIPE_APP_DEV_URL + url , params);
+        console.log(process.env.REACT_APP_STRIPE_APP_DEV_URL);
         return data;
     } catch (error) {
         console.log(error);
